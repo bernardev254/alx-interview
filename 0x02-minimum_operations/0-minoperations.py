@@ -3,6 +3,7 @@
 
 
 def minOperations(n: int) -> int:
+    """func computing the min ops"""
     written = 1
     steps = 1
     clipboard = 1
@@ -37,6 +38,6 @@ def minOperations(n: int) -> int:
             written += clipboard
             rem = n - written
 
-    if rem > clipboard:
+    if rem % clipboard != 0 or rem != 0:
         return 0
     return steps
