@@ -37,6 +37,6 @@ def minOperations(n: int) -> int:
             written += clipboard
             rem = n - written
 
-    if rem < clipboard:
+    if rem > clipboard:
         return 0
     return steps
