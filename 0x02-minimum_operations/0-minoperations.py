@@ -5,6 +5,8 @@
 def minOperations(n: int) -> int:
     """func computing the min ops"""
 
+    if type(n) is not int:
+        return 0
     import math
     written = 1
     steps = 1
