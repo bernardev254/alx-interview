@@ -4,10 +4,13 @@
 
 def minOperations(n: int) -> int:
     """func computing the min ops"""
+
+    import math
     written = 1
     steps = 1
     clipboard = 1
-
+    if math.isinf(n):
+        return 0
     if n <= 0:
         return 0
 
@@ -38,6 +41,8 @@ def minOperations(n: int) -> int:
             written += clipboard
             rem = n - written
 
-    if rem % clipboard != 0 or rem != 0:
+    if rem % clipboard != 0:
+        return 0
+    if rem != 0:
         return 0
     return steps
