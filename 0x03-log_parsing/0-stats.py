@@ -25,7 +25,8 @@ def status_tally(status, code):
 
 def print_status(status):
     """func printing status code  frequency"""
-    for k, v in OrderedDict(status).items():
+    status = OrderedDict(sorted(status.items()))
+    for k, v in status.items():
         if v is not 0:
             print("{}: {}".format(k, v))
 
@@ -52,6 +53,6 @@ if __name__ == "__main__":
         pass
 
     finally:
-        print("File size: {}".format(size))
+        print("File size: {:d}".format(size))
         print_status(status)
         sys.exit(0)
