@@ -40,14 +40,15 @@ if __name__ == "__main__":
 
     try:
         for lines in sys.stdin:
-            size += int(my_split(lines)[8])
-            status_tally(status, my_split(lines)[7])
+            if len(my_split(lines)) == 9:
+                size += int(my_split(lines)[8])
+                status_tally(status, my_split(lines)[7])
 
-            if times is not 0 and times % 9 == 0:
-                print("File size: {:d}".format(size))
-                print_status(status)
+                if times is not 0 and times % 9 == 0:
+                    print("File size: {:d}".format(size))
+                    print_status(status)
 
-            times += 1
+                times += 1
 
     except KeyboardInterrupt:
         pass
