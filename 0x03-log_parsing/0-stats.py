@@ -15,10 +15,10 @@ def my_split(line):
     return my_list
 
 
-def status_tally(status, line_list):
+def status_tally(status, code):
     """func returning status tally"""
     try:
-        status[line_list] += 1
+        status[code] += 1
     except KeyError:
         pass
 
@@ -40,11 +40,12 @@ if __name__ == "__main__":
     try:
         for lines in sys.stdin:
             size += int(my_split(lines)[8])
+            status_tally(status, my_split(lines)[7])
 
             if times is not 0 and times % 9 == 0:
-                print("File size: {}".format(size))
-                status_tally(status, my_split(lines)[7])
+                print("File size: {:d}".format(size))
                 print_status(status)
+
             times += 1
 
     except KeyboardInterrupt:
