@@ -4,8 +4,10 @@ module for island_perimeter() function
 """
 
 
-def recur(a, b, matrix, my_dict):
-    """recursion to find an island"""
+def find_neibour(a, b, matrix, cell_perimeter):
+    """finds the neibouring land in an island
+       and calculate the perimeter based on who neibours
+       a land -is it more land or water?- """
     steps = [
         (0, 1),
         (1, 0),
@@ -18,14 +20,14 @@ def recur(a, b, matrix, my_dict):
         if outside_grid(new_a, new_b, matrix):
             continue
         neibour = matrix[new_a][new_b]
-        key = '{}{}'.format(a, b)
-        if neibour == 1 and not (key in my_dict):
-            recur(a, b, matrix, my_dict)
+        if neibour == 1:
+            cell_perimeter -= 1
+    return cell_perimeter
 
 
 def outside_grid(a, b, matrix):
     """function to eliminate out of bounds error"""
-    if a < 0 or b < 0 or a > len(matrix) - 1 or b > len(matrix) - 1:
+    if a < 0 or b < 0 or a > len(matrix) - 1 or b > len(matrix[0]) - 1:
         return True
     return False
 
@@ -34,11 +36,13 @@ def island_perimeter(grid):
     """
     Computes the length of the perimeter of an island.
     """
-    in_island = {}
+    perimeter = 0
     for x, row in enumerate(grid):
         for y, cell in enumerate(row):
+            cell_perim = 0
             if cell == 1:
-                in_island['{}{}'.format(x, y)] = 'True'
-                recur(x, y, grid, in_island)
+                cell_perim = 4
+                cell_perim = find_neibour(x, y, grid, cell_perim)
+            perimeter += cell_perim
 
-    return len(in_island) * 2 + 2
+    return perimeter
