@@ -12,7 +12,7 @@ request(`https://swapi-api.hbtn.io/api/films/${movieId}/`, async (error, respons
     for (let character of characters) {
       request(character, async (error, response, body) => {
         if (!error && response) {
-          console.log(async JSON.parse(body).name);
+          console.log(await JSON.parse(body).name);
         }
       });
     }
